@@ -12,27 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authController = void 0;
-const authModelo_1 = __importDefault(require("../models/authModelo"));
-class AuthController {
-    iniciarSesion(req, res) {
+//import pool from '../utils/connection';
+const connection_1 = __importDefault(require("../config/connection"));
+class AuthModelo {
+    /*
+    *Método para buscar un usuario por username
+    */
+    getuserByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const { email, password } = req.body;
-                const lstUsers = yield authModelo_1.default.getuserByEmail(email);
-                // verificar que los datos no esten vacios
-                if (lstUsers.length <= 0) {
-                    return res
-                        .status(400)
-                        .json({ message: "Los campos son requeridos", code: 1 });
-                }
-                return res.json({ message: "Autenticación correcta", code: 0 });
-            }
-            catch (error) {
-                return res.status(500).json({ message: `${error.message}` });
-            }
+            let query = "SELECT * FROM tbl_usuario WHERE email='" + email + "'";
+            const result = yield connection_1.default.then((connection) => __awaiter(this, void 0, void 0, function* () {
+                return yield connection.query(query);
+            }));
+            return result;
         });
     }
 }
-exports.authController = new AuthController();
-//# sourceMappingURL=authController.js.map
+const model = new AuthModelo();
+exports.default = model;
+//# sourceMappingURL=authModelo.js.map

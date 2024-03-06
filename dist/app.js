@@ -8,6 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
+const usuarioRoutes_1 = __importDefault(require("./routes/usuarioRoutes"));
 class Server {
     //Inicializa clase
     constructor() {
@@ -32,7 +33,8 @@ class Server {
     }
     //Configura las rutas
     routes() {
-        this.app.use("/", authRoutes_1.default);
+        this.app.use('/', authRoutes_1.default);
+        this.app.use('/usuario', usuarioRoutes_1.default);
     }
 }
 const server = new Server();
