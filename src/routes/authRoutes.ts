@@ -1,19 +1,19 @@
-import {Router, RouterOpcions} from "express";
-import { authController } from "../controllers/authController";
+import {Router, RouterOptions} from 'express';
+import { authController } from '../controllers/authController';
+
 class AuthRoutes{
-    //objecto tipo router
-    public router: Router;
 
-    //inicializar constructor
+    public router :Router;
+
     constructor(){
-        this.router = Router();
+        this.router=Router();
         this.config();
-
     }
 
     config(){
-        this.router.post('/',authController.iniciarSesion);
-        };
+        this.router.post('/', authController.iniciarSesion); 
     }
-const authRoutes = new AuthRoutes();
+}
+
+const authRoutes=new AuthRoutes();
 export default authRoutes.router;

@@ -6,10 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const promise_mysql_1 = __importDefault(require("promise-mysql"));
 const pool = promise_mysql_1.default.createPool({
     host: 'localhost',
-    port: 3307, /*Se Cambio el puerto porque worbench ocupa ese puerto*/
+    port: 3307,
     user: 'root',
     password: '12345678',
     database: 'apliweb'
 });
-exports.default = pool;
+exports.default = {
+    keys: {
+        secret: ')(/&%$webintegral$#&/%'
+    },
+    database: pool
+};
 //# sourceMappingURL=connection.js.map
